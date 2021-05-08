@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import MenuItem from '../menu-item/menu-item.component';
 import './directory.styles.scss';
-
+//**Anything that contains data is gnerally has to be class component. Here the data is altough static. In real time data may come from DB */
 
 class Directory extends React.Component{
 
