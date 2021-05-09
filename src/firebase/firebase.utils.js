@@ -16,6 +16,31 @@ const config =  {
 
 firebase.initializeApp(config);
 
+export const createUserProfileDocument = async (userAuth,additionalData) => {
+    if(!userAuth) return; //if userAuth object not exists..i.e. if it is null then don't do anything
+    const userRef = firestore.doc(`users/${userAuth.uid}`);
+    const snapShot = await userRef.get(); // fetch the user from firestore db
+    if(!snapShot.exists){ // the exists property is true or false. If object is present in db it will return true
+        const {displayName, email} = userAuth;
+        const createdAt = new Date();
+        //setting the properties of userref object which is given by gmail. This is done in case user is not present in db
+        // see how the properties of the userref object is set, here displayName, email,createdAT is property of objects (key value pair)
+        try{
+            await userRef.set({
+                displayName,
+                email,
+                createdAt,
+                ...additionalData
+            })
+        } catch(error){
+                console.log('error creating the user ',error.message);
+        }
+    }
+    //console.log(snapShot);
+    return userRef;
+
+}
+
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
