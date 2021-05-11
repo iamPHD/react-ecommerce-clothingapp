@@ -2,7 +2,7 @@ import React from 'react';
 import './sign-in.styles.scss';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
-import {signInWithGoogle} from '../../firebase/firebase.utils'
+import {auth,signInWithGoogle} from '../../firebase/firebase.utils'
 
 /**
  * See that main signin component has data & so it is class level component.
@@ -21,17 +21,30 @@ class SignIn extends React.Component{
         };
     }
 
-    handleSubmit = event => {
+    handleSubmit = async event => {
+        alert("Into handle submit of Sigin");
         event.preventDefault(); //This is to prevent default action of submitting the form
-        this.state={email:'',password:''}; // after the form is submitted email & password state is set to blank again
+
+        const {email,password} = this.state;
+
+        try{
+            await auth.signInWithEmailAndPassword(email,password);
+            this.state={email:'',password:''}; // after the form is submitted email & password state is set to blank again
+        }catch(error){
+            console.log(error);
+        }
+
+        
     }
 
     handleChange = event => {
+        alert("Into handle change of Sigin");
         const {value, name} = event.target;
         this.setState({[name]:value});
     }
-
+    //
     render(){
+        alert("Into render of SignIN")
         //Notice that here we have created generic components for text box "FormInput" (actually it's a text box, so could have renamed as text box)
         // Similarly generic template/component is created for button ("CustomButton")
         return(
@@ -43,7 +56,7 @@ class SignIn extends React.Component{
                     <FormInput name='password' type='password' value={this.state.password} handleChange={this.handleChange} label="password" required/>
                     <div className='buttons'>
                         <CustomButton type="submit" > Sign In </CustomButton>
-                        <CustomButton onClick={signInWithGoogle} isGoogleSignIn> {' '} Sign in with Google {' '}</CustomButton>
+                        <CustomButton  onClick={signInWithGoogle} isGoogleSignIn> {' '} Sign in with Google {' '}</CustomButton>
                     </div>
                     
                 </form>

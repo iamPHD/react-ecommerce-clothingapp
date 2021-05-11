@@ -27,7 +27,8 @@ class ShopPage extends React.Component{
      */
 
     render(){
-        const {collections} = this.state;
+        alert("Into render method of ShopPage");
+        const {collections} = this.state;//Destructuring
         return(
             <div className='shop-page'>
                 {

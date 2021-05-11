@@ -21,6 +21,7 @@ export const createUserProfileDocument = async (userAuth,additionalData) => {
     const userRef = firestore.doc(`users/${userAuth.uid}`);
     const snapShot = await userRef.get(); // fetch the user from firestore db
     if(!snapShot.exists){ // the exists property is true or false. If object is present in db it will return true
+        alert("Creating user profile in db")
         const {displayName, email} = userAuth;
         const createdAt = new Date();
         //setting the properties of userref object which is given by gmail. This is done in case user is not present in db
@@ -35,6 +36,8 @@ export const createUserProfileDocument = async (userAuth,additionalData) => {
         } catch(error){
                 console.log('error creating the user ',error.message);
         }
+    }else{
+        alert("User is already present in DB");
     }
     //console.log(snapShot);
     return userRef;

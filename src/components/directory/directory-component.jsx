@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import MenuItem from '../menu-item/menu-item.component';
 import './directory.styles.scss';
-//**Anything that contains data is gnerally has to be class component. Here the data is altough static. In real time data may come from DB */
+//**Anything that contains data  gnerally has to be class component. Here the data is altough static. In real time data may come from DB */
 
 class Directory extends React.Component{
 
@@ -49,10 +49,12 @@ class Directory extends React.Component{
 
 
     render(){
-
+        // See below u r rotation through data present in state.
+        alert("Into render method of directory-component.js");
         return(
             
             <div className='directory-menu'>
+              
               {
                   // this.state.sections.map(({title,imageUrl,id,size,linkUrl})
                 this.state.sections.map(({id, ...otherSectionProps}) =>(

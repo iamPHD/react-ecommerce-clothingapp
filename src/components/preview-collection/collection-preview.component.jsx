@@ -1,7 +1,7 @@
 import React from 'react';
 import CollectionItem from '../collection-item/collection-item.component';
 import './collection-preview.styles.scss'
-
+//altough there are many props sent through ...otherProps, u can accept only the ones u want
 const CollectionPreview = ({title,items})=>(
     <div className='collection-preview'>
         <h1 className='title'>{title.toUpperCase()}</h1>

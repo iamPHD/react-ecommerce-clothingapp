@@ -8,6 +8,11 @@ import {withRouter} from 'react-router-dom';
  * history and match are router related params , wchich are avlbl in the component it is called.
  * E.g. The other way was to pass all params through component chaining/tunneling which is bad pratcice
  * 
+ * 
+ * Questions
+ * 1) Router operation
+ * 2) History & match params passing it as props to the component
+ * 
  */
 const MenuItem = ({title,imageUrl,size,linkUrl,history,match})=>(
    
